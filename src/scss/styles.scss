@@ -1,0 +1,28 @@
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+
+.navbar {
+  padding: 20px;
+}
+
+.container {
+  padding: 30px 20px 30px 20px;
+
+  .card {
+    padding: 0px;
+  }
+
+  .row {
+    > .col,
+    > [class*="col-"] {
+      margin-top: 10px;
+    }
+  }
+
+  .row {
+    > .col:not(:first-child),
+    > [class*="col-"]:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+}
