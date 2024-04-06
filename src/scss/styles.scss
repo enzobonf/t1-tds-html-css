@@ -16,13 +16,15 @@
     > .col,
     > [class*="col-"] {
       margin-top: 10px;
+      margin-right: 10px;
     }
   }
 
-  .row {
-    > .col:not(:first-child),
-    > [class*="col-"]:not(:first-child) {
-      margin-left: 10px;
+  /* .row {
+    > .col:not(:last-child),
+    > [class*="col-"]:not(:last-child) {
+      margin-right: 10px;
+      background-color: red;
     }
-  }
+  } */
 }
