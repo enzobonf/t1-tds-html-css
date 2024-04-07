@@ -49,6 +49,33 @@ const carros = [
   },
 ];
 
+const marcasTipos = {
+  1: [
+    "Aston Martin",
+    "Audi",
+    "BMW",
+    "Chevrolet",
+    "Ferrari",
+    "Ford",
+    "Honda",
+    "Mercedes",
+    "Mercedes-Benz",
+    "Porsche",
+    "Toyota",
+    "Volkswagen",
+  ],
+  2: [
+    "BMW",
+    "Ducati",
+    "Harley-Davidson",
+    "Honda",
+    "Kawasaki",
+    "Suzuki",
+    "Triumph",
+    "Yamaha",
+  ],
+};
+
 const CarroCard = (carro) => {
   const div = document.createElement("div");
   div.className = "col-lg-3 col-md-5 col-sm-12 card";
@@ -63,10 +90,33 @@ const CarroCard = (carro) => {
             ${carro.marca} ${carro.modelo}
         </h5>
         <p class="card-text">${carro.preco}</p>
-        <a href="#" class="btn btn-primary">Ver mais</a>
+        <a href="#" class="btn btn-primary btnVerMais">Ver mais</a>
         </div>
     `;
   return div;
+};
+
+const changeMarcas = (idTipoVeiculo, marcaSelect) => {
+  const marcasTipo = marcasTipos[idTipoVeiculo];
+  console.log(marcasTipo);
+
+  marcaSelect.innerHTML = `
+        <option value="">Selecione uma marca</option>
+        ${marcasTipo.map(
+          (marca) => `<option value="${marca}">${marca}</option>`
+        )}
+    `;
+};
+
+let initChangeMarcas = function () {
+  const tipoVeiculoSelect = document.getElementById("tipoVeiculo");
+  const marcaSelect = document.getElementById("marcaVeiculo");
+
+  tipoVeiculoSelect.addEventListener("change", (event) =>
+    changeMarcas(event.target.value, marcaSelect)
+  );
+
+  changeMarcas(1, marcaSelect);
 };
 
 function main() {
@@ -74,6 +124,8 @@ function main() {
   const carrosHtml = carros.map(CarroCard);
 
   divCarros.append(...carrosHtml);
+
+  initChangeMarcas();
 }
 
 main();
