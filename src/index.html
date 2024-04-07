@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap w/ Webpack</title>
+    <title>Bonfante Motors</title>
   </head>
   <body>
     <header>
@@ -47,7 +47,12 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="./anunciar"
+                <a
+                  class="nav-link"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  aria-current="page"
+                  href="./anunciar"
                   >Anunciar</a
                 >
               </li>
@@ -73,14 +78,6 @@
         <h1>Carros</h1>
         <div class="row justify-content-center" id="carros"></div>
       </div>
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Launch demo modal
-      </button>
     </main>
 
     <!-- Modal -->
@@ -91,10 +88,12 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog mw-100" style="width: 800px">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Anunciar um veículo
+            </h1>
             <button
               type="button"
               class="btn-close"
@@ -102,7 +101,32 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Tipo de veículo:</label
+                  >
+                  <select
+                    class="form-control form-select"
+                    aria-label="Selecione o tipo de veículo"
+                    id="tipoVeiculo"
+                  >
+                    <option value="1">Carro</option>
+                    <option value="2">Moto</option>
+                  </select>
+                </div>
+
+                <div class="col-3 form-group">
+                  <label for="message-text" class="col-form-label"
+                    >Message:</label
+                  >
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
           <div class="modal-footer">
             <button
               type="button"
