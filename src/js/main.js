@@ -1,6 +1,4 @@
-// Import all of Bootstrap's JS
 import * as bootstrap from "bootstrap";
-// Import our custom CSS
 import "../scss/styles.scss";
 import "../scss/custom.scss";
 
@@ -81,25 +79,33 @@ const CarroCard = (carro) => {
   div.className = "col-lg-3 col-md-5 col-sm-12 card";
   div.innerHTML = `
         <img
-        class="card-img-top"
-        src="${carro.imagem}"
-        alt="Card image cap"
+          class="card-img-top imgCarro"
+          src="${carro.imagem}"
+          alt="Imagem do carro"
         />
         <div class="card-body">
-        <h5 class="card-title">
-            ${carro.marca} ${carro.modelo}
-        </h5>
-        <p class="card-text">${carro.preco}</p>
-        <a href="#" class="btn btn-primary btnVerMais">Ver mais</a>
+          <h5 class="card-title">
+              ${carro.marca} ${carro.modelo}
+          </h5>
+          <p class="card-text">${carro.preco}</p>
+          <a href="#" class="btn btn-primary btnVerMais">Ver mais</a>
         </div>
     `;
+
+  const img = div.querySelector(".imgCarro");
+  img.addEventListener("mouseenter", () => {
+    img.style.transform = "scale(1.1)";
+  });
+
+  img.addEventListener("mouseleave", () => {
+    img.style.transform = "scale(1)";
+  });
+
   return div;
 };
 
 const changeMarcas = (idTipoVeiculo, marcaSelect) => {
   const marcasTipo = marcasTipos[idTipoVeiculo];
-  console.log(marcasTipo);
-
   marcaSelect.innerHTML = `
         <option value="">Selecione uma marca</option>
         ${marcasTipo.map(
@@ -108,7 +114,7 @@ const changeMarcas = (idTipoVeiculo, marcaSelect) => {
     `;
 };
 
-let initChangeMarcas = function () {
+const initChangeMarcas = function () {
   const tipoVeiculoSelect = document.getElementById("tipoVeiculo");
   const marcaSelect = document.getElementById("marcaVeiculo");
 
@@ -119,13 +125,70 @@ let initChangeMarcas = function () {
   changeMarcas(1, marcaSelect);
 };
 
-function main() {
+const initAnosSelect = () => {
+  const anoSelect = document.getElementById("anoVeiculo");
+  const anoAtual = new Date().getFullYear();
+
+  for (let i = anoAtual; i >= 1920; i--) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = i;
+    anoSelect.appendChild(option);
+  }
+};
+
+const initInputQuiometragem = () => {
+  const radios = document.getElementsByName("condicaoVeiculoRadio");
+  const inputQuilometragem = document.getElementById("kmVeiculo");
+  radios.forEach((radio) => {
+    radio.addEventListener("change", (event) => {
+      const idCondicao = +event.target.value;
+      switch (idCondicao) {
+        case 1:
+          inputQuilometragem.setAttribute("disabled", true);
+          inputQuilometragem.value = "0";
+          break;
+        case 2:
+          inputQuilometragem.removeAttribute("disabled");
+          break;
+      }
+    });
+  });
+};
+
+const loadCarros = () => {
   const divCarros = document.getElementById("carros");
   const carrosHtml = carros.map(CarroCard);
-
   divCarros.append(...carrosHtml);
+};
 
+const initForm = () => {
+  const form = document.getElementById("formAnunciar");
+  const modalForm = new bootstrap.Modal(document.getElementById("formModal"));
+  const modalSucesso = new bootstrap.Modal(
+    document.getElementById("successModal")
+  );
+
+  const sucessoText = document.getElementById("sucessoText");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    sucessoText.textContent = `${data.marcaVeiculo} ${data.modeloVeiculo} ${data.anoVeiculo}`;
+    modalForm.hide();
+    modalSucesso.show();
+    form.reset();
+  });
+};
+
+function main() {
+  loadCarros();
   initChangeMarcas();
+  initAnosSelect();
+  initInputQuiometragem();
+  initForm();
 }
 
 main();

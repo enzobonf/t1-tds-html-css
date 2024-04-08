@@ -7,7 +7,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-customm">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Bonfante Motors</a>
           <button
@@ -50,7 +50,7 @@
                 <a
                   class="nav-link"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
+                  data-bs-target="#formModal"
                   aria-current="page"
                   href="./anunciar"
                   >Anunciar</a
@@ -59,12 +59,12 @@
             </ul>
             <form class="d-flex" role="search">
               <input
-                class="form-control me-10"
+                class="form-control me-20"
                 type="search"
                 placeholder="Digite o modelo do carro"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-ss" type="suuccesbmit">
+              <button class="btn btn-outline-ss btn-primary" type="suuccesbmit">
                 Pesquisar
               </button>
             </form>
@@ -75,23 +75,23 @@
 
     <main>
       <div class="container">
-        <h1>Carros</h1>
-        <div class="row justify-content-center" id="carros"></div>
+        <h1 class="titulo">Carros</h1>
+        <div class="row justify-content-center carros" id="carros"></div>
       </div>
     </main>
 
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="formModal"
       tabindex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="formModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog mw-100" style="width: 800px">
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 800px">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <h1 class="modal-title fs-5" id="formModalLabel">
               Anunciar um veículo
             </h1>
             <button
@@ -101,17 +101,18 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <form>
+          <form id="formAnunciar" method="post" action="">
+            <div class="modal-body">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                  <label for="recipient-name" class="col-form-label"
+                  <label for="tipoVeiculo" class="col-form-label"
                     >Tipo de veículo:</label
                   >
                   <select
                     class="form-control form-select"
                     aria-label="Selecione o tipo de veículo"
                     id="tipoVeiculo"
+                    name="tipoVeiculo"
                   >
                     <option value="1" selected>Carro</option>
                     <option value="2">Moto</option>
@@ -119,27 +120,149 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                  <label for="recipient-name" class="col-form-label"
-                    >Marca</label
-                  >
+                  <label for="marcaVeiculo" class="col-form-label">Marca</label>
                   <select
                     class="form-control form-select"
                     aria-label="Selecione o tipo de veículo"
                     id="marcaVeiculo"
+                    name="marcaVeiculo"
                   ></select>
                 </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                  <label for="corVeiculo" class="col-form-label"
+                    >Condição</label
+                  >
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="condicaoVeiculoRadio"
+                      id="condicaoVeiculoRadio1"
+                      value="1"
+                      checked
+                    />
+                    <label class="form-check-label" for="condicaoVeiculoRadio1">
+                      Novo
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="condicaoVeiculoRadio"
+                      id="condicaoVeiculoRadio2"
+                      value="2"
+                    />
+                    <label class="form-check-label" for="condicaoVeiculoRadio2">
+                      Usado
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-lg-7 col-md-6 col-sm-12 form-group">
+                  <label for="modeloVeiculo" class="col-form-label"
+                    >Modelo</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="modeloVeiculo"
+                    name="modeloVeiculo"
+                  />
+                </div>
+
+                <div class="col-lg-5 col-md-6 col-sm-12 form-group">
+                  <label for="anoVeiculo" class="col-form-label">Ano</label>
+                  <select
+                    class="form-control form-select"
+                    aria-label="Selecione o ano do veículo"
+                    id="anoVeiculo"
+                    name="anoVeiculo"
+                  >
+                    <option value="">Selecione o ano do veículo</option>
+                  </select>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                  <label for="corVeiculo" class="col-form-label">Cor</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="corVeiculo"
+                    name="corVeiculo"
+                  />
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                  <label for="kmVeiculo" class="col-form-label"
+                    >Quilometragem</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="kmVeiculo"
+                    name="kmVeiculo"
+                    value="0"
+                    disabled
+                  />
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                  <label for="precoVeiculo" class="col-form-label">Preço</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="precoVeiculo"
+                    name="precoVeiculo"
+                    value="0"
+                  />
+                </div>
+                ''
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fechar
+              </button>
+              <button type="submit" class="btn btn-primary" name="btnEnviar">
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 800px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="formModalLabel">Sucesso</h1>
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn-close"
               data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <i class="bi bi-check-circle-fill icon text-success fs-50"></i>
+            <span class="sucessoText"
+              >O anúncio do veículo
+              <span id="sucessoText">Porsche 911 GT3 RS 2024</span> foi
+              solicitado com sucesso!</span
             >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
