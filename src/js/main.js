@@ -129,11 +129,14 @@ const initAnosSelect = () => {
   const anoSelect = document.getElementById("anoVeiculo");
   const anoAtual = new Date().getFullYear();
 
+  let selected = true;
   for (let i = anoAtual; i >= 1920; i--) {
     const option = document.createElement("option");
     option.value = i;
     option.textContent = i;
+    option.selected = selected;
     anoSelect.appendChild(option);
+    selected = false;
   }
 };
 
@@ -175,6 +178,7 @@ const initForm = () => {
     event.preventDefault();
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
+    console.log(data);
 
     sucessoText.textContent = `${data.marcaVeiculo} ${data.modeloVeiculo} ${data.anoVeiculo}`;
     modalForm.hide();
