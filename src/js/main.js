@@ -178,7 +178,6 @@ const initForm = () => {
     event.preventDefault();
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    console.log(data);
 
     sucessoText.textContent = `${data.marcaVeiculo} ${data.modeloVeiculo} ${data.anoVeiculo}`;
     modalForm.hide();
